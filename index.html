@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>A Enciclopédia Oficial da Manuella 💀</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💀</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -1360,6 +1361,45 @@
             font-weight: 700;
         }
 
+        /* ===================== SOUNDBOARD ===================== */
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+
+        .sound-btn {
+            background: rgba(168, 85, 247, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 12px;
+            padding: 0.6rem 0.4rem;
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .sound-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: var(--purple);
+            transform: scale(1.05);
+        }
+
+        .sound-btn:active {
+            transform: scale(0.95);
+        }
+
+        .sound-icon {
+            font-size: 1.3rem;
+        }
+
         /* ===================== DETECTOR TOOLS ===================== */
         .sensor-btn {
             width: 80px;
@@ -1436,26 +1476,28 @@
 
     <!-- ===================== ÁUDIOS ===================== -->
     <!-- Sons de memes do Site Gabriel -->
-    <audio id="snd-bruh" src="BRUH - Sound - SR.mp3" preload="auto"></audio>
-    <audio id="snd-augh" src="AUUGHHH.mp3" preload="auto"></audio>
-    <audio id="snd-getout" src="GET OUT!!.mp3" preload="auto"></audio>
-    <audio id="snd-sponge" src="Sponge bob disappointed.mp3" preload="auto"></audio>
-    <audio id="snd-vine" src="Vine boom.mp3" preload="auto"></audio>
-    <audio id="snd-goofy" src="Goofy ahh laugh.mp3" preload="auto"></audio>
-    <audio id="snd-winerror" src="Windows Error - Sound - SR.mp3" preload="auto"></audio>
-    <audio id="snd-winstartup" src="Windows Startup - Sound - SR.mp3" preload="auto"></audio>
-    <audio id="snd-yeahbaby" src="WOOOOOOOOOH! yeah baby.mp3" preload="auto"></audio>
-    <audio id="snd-heheboy" src="HEHE Boi - Sound - SR.mp3" preload="auto"></audio>
-    <audio id="snd-fatality" src="Fatality MK - Sound - SR.mp3" preload="auto"></audio>
-    <audio id="snd-ohio" src="Ohio memes.mp3" preload="auto"></audio>
-    <audio id="snd-vineboom2" src="Bass Drop.mp3" preload="auto"></audio>
-    <audio id="snd-quandale" src="Quandale Dingle.mp3" preload="auto"></audio>
-    <audio id="snd-bigfart" src="Big Fart.mp3" preload="auto"></audio>
-    <audio id="snd-dolphin" src="Dolphin laugh.mp3" preload="auto"></audio>
-    <audio id="snd-goku" src="Goku Ultra Instinct.mp3" preload="auto"></audio>
-    <audio id="snd-alarm" src="Alarm.mp3" preload="auto"></audio>
-    <audio id="snd-gtawasted" src="GTA V Wasted - Sound - SR.mp3" preload="auto"></audio>
-    <audio id="snd-skibidi" src="Skibidi Bop MM Dada - Sound - SR..mp3" preload="auto"></audio>
+    <audio id="snd-bruh" src="../Site Gabriel/audios memes/BRUH - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-augh" src="../Site Gabriel/audios memes/AUUGHHH.mp3" preload="auto"></audio>
+    <audio id="snd-getout" src="../Site Gabriel/audios memes/GET OUT!!.mp3" preload="auto"></audio>
+    <audio id="snd-sponge" src="../Site Gabriel/audios memes/Sponge bob disappointed.mp3" preload="auto"></audio>
+    <audio id="snd-vine" src="../Site Gabriel/audios memes/Vine boom.mp3" preload="auto"></audio>
+    <audio id="snd-goofy" src="../Site Gabriel/audios memes/Goofy ahh laugh.mp3" preload="auto"></audio>
+    <audio id="snd-winerror" src="../Site Gabriel/audios memes/Windows Error - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-winstartup" src="../Site Gabriel/audios memes/Windows Startup - Sound - SR.mp3"
+        preload="auto"></audio>
+    <audio id="snd-yeahbaby" src="../Site Gabriel/audios memes/WOOOOOOOOOH! yeah baby.mp3" preload="auto"></audio>
+    <audio id="snd-heheboy" src="../Site Gabriel/audios memes/HEHE Boi - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-fatality" src="../Site Gabriel/audios memes/Fatality MK - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-ohio" src="../Site Gabriel/audios memes/Ohio memes.mp3" preload="auto"></audio>
+    <audio id="snd-vineboom2" src="../Site Gabriel/audios memes/Bass Drop.mp3" preload="auto"></audio>
+    <audio id="snd-quandale" src="../Site Gabriel/audios memes/Quandale Dingle.mp3" preload="auto"></audio>
+    <audio id="snd-bigfart" src="../Site Gabriel/audios memes/Big Fart.mp3" preload="auto"></audio>
+    <audio id="snd-dolphin" src="../Site Gabriel/audios memes/Dolphin laugh.mp3" preload="auto"></audio>
+    <audio id="snd-goku" src="../Site Gabriel/audios memes/Goku Ultra Instinct.mp3" preload="auto"></audio>
+    <audio id="snd-alarm" src="../Site Gabriel/audios memes/Alarm.mp3" preload="auto"></audio>
+    <audio id="snd-gtawasted" src="../Site Gabriel/audios memes/GTA V Wasted - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-skibidi" src="../Site Gabriel/audios memes/Skibidi Bop MM Dada - Sound - SR..mp3"
+        preload="auto"></audio>
 
     <!-- Player de música -->
     <audio id="music-player"></audio>
@@ -1633,6 +1675,16 @@
                 </div>
             </div>
 
+            <!-- ===== SOUNDBOARD ===== -->
+            <div class="card section-animate" style="animation-delay:0.22s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">🔊</span> Soundboard: Sons do Caos</div>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;text-align:center;margin-bottom:1rem;">não baixei audios atoa então sai apertando ai</p>
+                    <div class="sound-grid" id="sound-grid"></div>
+                </div>
+            </div>
 
             <!-- ===== TOOLS GRID ===== -->
             <div class="grid-2">
@@ -1750,7 +1802,7 @@
                         <button class="btn btn-danger blink" id="btn-no-proposal">NÃO</button>
                     </div>
                     <p style="color:var(--muted);font-size:0.8rem;margin-top:1.5rem;">Pode ser honesta. Ninguém tá
-                        olhando. </p>
+                        olhando. (mentira)</p>
                 </div>
             </div>
 
@@ -1761,7 +1813,7 @@
                 </div>
                 <div class="card-body">
                     <p style="color:var(--muted);font-size:0.85rem;text-align:center;margin-bottom:1rem;">Tem alguma
-                        reclamação? Escreva abaixo.</p>
+                        reclamação? Escreva abaixo. Essa mensagem vai direto pra lixeira.</p>
                     <textarea class="input-field" id="sac-input" placeholder="Digite sua reclamação aqui..."></textarea>
                     <button class="btn btn-ghost btn-full" id="sac-btn" style="margin-top:0.75rem;">Enviar
                         Reclamação</button>
@@ -1997,6 +2049,7 @@
         function initCarousel() {
             const inner = document.getElementById('carousel-inner');
             const counter = document.getElementById('carousel-counter');
+            if (!inner || !counter) return;
             const imgs = [];
             for (let i = 1; i <= 16; i++) imgs.push(`teste (${i}).jpg`);
 
@@ -2140,13 +2193,14 @@
                 { title: 'Ai Meu Uuu', artist: 'MC Jessica do Escadão', src: 'MC JESSICA DO ESCADÃO - AI MEU UUU - DJ DO CRIME  ( DA PONTE PRA CA ).mp3' },
                 { title: 'Vampiro de Madureira', artist: 'MC Carol feat. MC Gorila', src: 'MC CAROL - VAMPIRO DE MADUREIRA (feat. MC GORILA) [prod. DuaL].mp3' },
                 { title: 'Deixa a Marca', artist: 'MC Jessica do Escadão', src: 'DEIXA A MARCA - DEIXA SUA MARCA  - MC JESSICA DO ESCADÃO  -  DJ JULLINHO 013.mp3' },
-                { title: 'MacPorra', artist: 'Kleberiano', src: 'Kleberiano - MacPorra (lyrics)[português⧸japonês⧸romanji] #kleberiano kleber.mp3' },
+                { title: 'MacPorra', artist: 'Kleberiano', src: 'Kleberiano - MacPorra.mp3' },
             ];
 
             const audio = document.getElementById('music-audio');
             const titleEl = document.getElementById('music-title-display');
             const disc = document.getElementById('music-disc');
             const listEl = document.getElementById('song-list');
+            if (!audio || !titleEl || !disc || !listEl) return;
 
             let current = 0;
 
@@ -2206,6 +2260,7 @@
             ];
 
             const grid = document.getElementById('sound-grid');
+            if (!grid) return;
             sounds.forEach(s => {
                 const btn = document.createElement('button');
                 btn.className = 'sound-btn';
