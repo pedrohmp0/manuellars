@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Enciclopédia Oficial da Manuella 💀</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===================== RESET & VARIAVEIS ===================== */
+        :root {
+            --bg: #09090b;
+            --card-bg: rgba(20, 20, 25, 0.85);
+            --border: rgba(255, 255, 255, 0.07);
+            --purple: #a855f7;
+            --pink: #ec4899;
+            --gradient: linear-gradient(135deg, #a855f7, #ec4899, #f97316);
+            --gradient-soft: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.15));
+            --text: #f4f4f5;
+            --muted: #a1a1aa;
+            --font: 'Outfit', 'Montserrat', sans-serif;
+            --radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ===================== SCROLLBAR ===================== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--purple);
+            border-radius: 3px;
+        }
+
+        /* ===================== PARTICLE CANVAS ===================== */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* ===================== CONTRATO ===================== */
+        #contract-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #1a0a2e 0%, #09090b 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        #contract-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(rgba(168, 85, 247, 0.4) 0.5px, transparent 0.5px),
+                radial-gradient(rgba(168, 85, 247, 0.4) 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        .contract-card {
+            max-width: 600px;
+            width: 100%;
+            max-height: 90dvh;
+            overflow-y: auto;
+            background: var(--card-bg);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: var(--radius);
+            padding: 2rem 1.5rem;
+            box-shadow: 0 0 60px rgba(168, 85, 247, 0.2), 0 25px 50px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            position: relative;
+            z-index: 1;
+            animation: contractAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes contractAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .contract-title {
+            font-size: clamp(1.4rem, 5vw, 2rem);
+            font-weight: 900;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.3rem;
+        }
+
+        .contract-subtitle {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contract-skull {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: skullBounce 1s ease-in-out infinite;
+        }
+
+        @keyframes skullBounce {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(5deg);
+            }
+        }
+
+        .contract-terms {
+            background: rgba(168, 85, 247, 0.05);
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            border-radius: 12px;
+            padding: 1.2rem;
+            max-height: 220px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #d4d4d8;
+        }
+
+        .contract-terms ol {
+            padding-left: 1.3rem;
+        }
+
+        .contract-terms li {
+            margin-bottom: 0.6rem;
+        }
+
+        .contract-terms .highlight {
+            color: var(--pink);
+            font-weight: 700;
+        }
+
+        .contract-check-label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            justify-content: center;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .contract-check-label input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            accent-color: var(--purple);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient);
+            color: white;
+            font-family: var(--font);
+            font-size: 1rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:not(:disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .contract-fine-print {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.75rem;
+            margin-top: 0.8rem;
+        }
+
+        /* ===================== MAIN CONTENT ===================== */
+        #main-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===================== HEADER ===================== */
+        .site-header {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            position: relative;
+        }
+
+        .site-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .site-title {
+            font-size: clamp(1.8rem, 8vw, 3.5rem);
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .site-subtitle {
+            color: var(--muted);
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            font-weight: 400;
+        }
+
+        .site-badge {
+            display: inline-block;
+            background: var(--gradient-soft);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: var(--purple);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            margin-top: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ===================== LAYOUT ===================== */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+        }
+
+        .space-y>*+* {
+            margin-top: 1.5rem;
+        }
+
+        /* ===================== CARDS ===================== */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.1);
+        }
+
+        .card-header {
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.1));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .card-title .emoji {
+            margin-right: 0.4rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* ===================== BUTTONS ===================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn-gradient {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            color: white;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        /* ===================== CAROUSEL ===================== */
+        .carousel-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 4/3;
+        }
+
+        @media (max-width: 480px) {
+            .carousel-wrapper {
+                aspect-ratio: 1/1;
+            }
+        }
+
+        .carousel-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-item {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            z-index: -1;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-btn:hover {
+            background: rgba(168, 85, 247, 0.7);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        .carousel-counter {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            z-index: 5;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ===================== PLAYER DE MÚSICA ===================== */
+        .music-player {
+            text-align: center;
+        }
+
+        .music-now-playing {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(168, 85, 247, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .music-disc {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            animation: spin 3s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .music-disc.playing {
+            animation-play-state: running;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .music-info {
+            flex: 1;
+            text-align: left;
+            min-width: 0;
+        }
+
+        .music-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .music-artist {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .music-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .music-controls audio {
+            width: 100%;
+        }
+
+        audio {
+            width: 100%;
+            outline: none;
+            border-radius: 8px;
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        audio::-webkit-media-controls-panel {
+            background: rgba(20, 20, 30, 0.9);
+        }
+
+        .song-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .song-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .song-item:hover {
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .song-item.active {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .song-item .song-num {
+            color: var(--muted);
+            font-size: 0.8rem;
+            width: 1.5rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .song-item .song-name {
+            font-size: 0.85rem;
+            flex: 1;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .song-item.active .song-name {
+            color: var(--purple);
+            font-weight: 700;
+        }
+
+        /* ===================== QI ANALISADOR ===================== */
+        .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: var(--purple);
+        }
+
+        .input-field::placeholder {
+            color: var(--muted);
+        }
+
+        textarea.input-field {
+            resize: none;
+            min-height: 100px;
+        }
+
+        /* ===================== TINDER ===================== */
+        .tinder-profile-card {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tinder-avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(168, 85, 247, 0.5);
+            margin: 0 auto 1rem;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
+        }
+
+        .tinder-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tinder-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .tinder-age {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tinder-desc {
+            color: #d4d4d8;
+            font-size: 0.9rem;
+            max-width: 340px;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .tinder-counter {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .tinder-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .tinder-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tinder-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .tinder-btn:active {
+            transform: scale(0.95);
+        }
+
+        .tinder-btn.nope {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: white;
+            box-shadow: 0 5px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .tinder-btn.like {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            color: white;
+            box-shadow: 0 5px 20px rgba(22, 163, 74, 0.4);
+        }
+
+        .tinder-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .tinder-result {
+            text-align: center;
+            min-height: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.75rem;
+        }
+
+        .forced-match {
+            border: 2px solid var(--pink) !important;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4) !important;
+        }
+
+        /* ===================== SWIPE ANIMATION ===================== */
+        @keyframes swipeLeft {
+            to {
+                transform: translateX(-150%) rotate(-25deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes swipeRight {
+            to {
+                transform: translateX(150%) rotate(25deg);
+                opacity: 0;
+            }
+        }
+
+        .swiping-left {
+            animation: swipeLeft 0.35s ease forwards;
+        }
+
+        .swiping-right {
+            animation: swipeRight 0.35s ease forwards;
+        }
+
+        /* ===================== BLUR IMAGE ===================== */
+        .blur-reveal {
+            position: relative;
+            cursor: pointer;
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+        }
+
+        .blur-reveal img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(25px) brightness(0.6);
+            transition: filter 0.6s ease;
+        }
+
+        .blur-reveal.revealed img {
+            filter: blur(0) brightness(1);
+        }
+
+        .blur-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: opacity 0.5s ease;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .blur-overlay i {
+            font-size: 2rem;
+        }
+
+        .blur-reveal.revealed .blur-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ===================== MEMORY GAME ===================== */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.6rem;
+        }
+
+        @media (max-width: 400px) {
+            .memory-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.4rem;
+            }
+        }
+
+        .memory-card {
+            aspect-ratio: 1/1;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            opacity: 0.65;
+            cursor: default;
+        }
+
+        .memory-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .memory-back {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(236, 72, 153, 0.3));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--purple);
+        }
+
+        .memory-front {
+            transform: rotateY(180deg);
+            background-size: cover;
+            background-position: center;
+            background-color: #111;
+        }
+
+        .memory-card.matched .memory-front {
+            border: 2px solid #22c55e;
+        }
+
+        .memory-stats {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* ===================== PERGUNTA IMPOSSÍVEL ===================== */
+        .impossible-section {
+            text-align: center;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impossible-question {
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .impossible-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            position: relative;
+            min-height: 80px;
+            align-items: center;
+            width: 100%;
+        }
+
+        #btn-no-proposal {
+            position: absolute;
+            touch-action: none;
+            z-index: 10;
+            transition: top 0.08s linear, left 0.08s linear;
+        }
+
+        /* ===================== SAC ===================== */
+        /* uses input-field for textarea */
+
+        /* ===================== ELOGIOS ===================== */
+        .praise-output {
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--purple);
+            font-weight: 600;
+            padding: 0.5rem;
+            background: rgba(168, 85, 247, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(168, 85, 247, 0.1);
+            margin-top: 1rem;
+        }
+
+        /* ===================== ÁUDIO VAZADO ===================== */
+        .audio-leak-player {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        /* ===================== MODAL ===================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--card-bg);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: var(--radius);
+            padding: 2rem 1.5rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.85);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 50px rgba(168, 85, 247, 0.2);
+        }
+
+        .modal-overlay.open .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            color: var(--muted);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text);
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-message {
+            color: #d4d4d8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===================== MODAL PRÊMIO ===================== */
+        .prize-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .prize-modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .prize-modal-box {
+            background: var(--card-bg);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90dvh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .prize-modal-overlay.open .prize-modal-box {
+            transform: scale(1);
+        }
+
+        .prize-modal-header {
+            padding: 1.2rem;
+            background: var(--gradient);
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .prize-modal-body {
+            padding: 1rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .prize-modal-body img {
+            width: 100%;
+            border-radius: 10px;
+            max-height: 60dvh;
+            object-fit: contain;
+        }
+
+        .prize-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===================== CÂMERA ===================== */
+        #camera-modal {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #camera-video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+        }
+
+        .camera-crack {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            background:
+                linear-gradient(135deg, transparent 48%, rgba(255, 255, 255, 0.35) 49%, rgba(255, 255, 255, 0.35) 51%, transparent 52%),
+                linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.2) 49%, rgba(255, 255, 255, 0.2) 51%, transparent 52%),
+                radial-gradient(ellipse at 30% 70%, rgba(255, 255, 255, 0.1) 1px, transparent 2px),
+                radial-gradient(ellipse at 70% 30%, rgba(255, 255, 255, 0.1) 1px, transparent 2px);
+        }
+
+        .camera-text {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 1.2rem 2rem;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .camera-text h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+
+        .camera-text p {
+            color: #fde68a;
+            font-weight: 600;
+        }
+
+        .camera-close-btn {
+            position: absolute;
+            bottom: 2rem;
+            z-index: 3;
+        }
+
+        /* ===================== SOUND BUTTONS ===================== */
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 0.6rem;
+        }
+
+        .sound-btn {
+            background: rgba(168, 85, 247, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 10px;
+            padding: 0.7rem 0.5rem;
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s, transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .sound-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .sound-btn:active {
+            transform: scale(0.95);
+        }
+
+        .sound-btn .sound-icon {
+            font-size: 1.3rem;
+        }
+
+        /* ===================== FAKE MUTE ===================== */
+        .fake-mute {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 9990;
+            width: 44px;
+            height: 44px;
+            background: rgba(20, 20, 25, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .fake-mute:hover {
+            background: rgba(168, 85, 247, 0.3);
+        }
+
+        /* ===================== MISSÃO SECRETA ===================== */
+        .secret-success {
+            background: rgba(22, 163, 74, 0.1);
+            border: 1px solid rgba(22, 163, 74, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        /* ===================== GRID 2 COL ===================== */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===================== CONTRATO ASSINADO ===================== */
+        .signed-contract {
+            background: rgba(22, 163, 74, 0.08);
+            border: 1px solid rgba(22, 163, 74, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: #86efac;
+            line-height: 1.8;
+        }
+
+        /* ===================== ANIMATIONS ===================== */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-animate {
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .blink {
+            animation: blink 0.9s infinite;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-6px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(6px);
+            }
+        }
+
+        .shake {
+            animation: shake 0.3s ease;
+        }
+
+        /* ===================== FOOTER ===================== */
+        .site-footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .site-footer span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* ===================== SOUNDBOARD ===================== */
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+
+        .sound-btn {
+            background: rgba(168, 85, 247, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 12px;
+            padding: 0.6rem 0.4rem;
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .sound-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: var(--purple);
+            transform: scale(1.05);
+        }
+
+        .sound-btn:active {
+            transform: scale(0.95);
+        }
+
+        .sound-icon {
+            font-size: 1.3rem;
+        }
+
+        /* ===================== DETECTOR TOOLS ===================== */
+        .sensor-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid rgba(168, 85, 247, 0.4);
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--purple);
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            transition: all 0.2s;
+            font-family: var(--font);
+        }
+
+        .sensor-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            transform: scale(1.05);
+        }
+
+        .sensor-btn:active {
+            transform: scale(0.95);
+        }
+
+        .result-output {
+            min-height: 30px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--pink);
+            font-size: 0.9rem;
+        }
+
+        /* ===================== MOBILE EXTRAS ===================== */
+        @media (max-width: 480px) {
+            .card-body {
+                padding: 1rem;
+            }
+
+            .card-header {
+                padding: 1rem;
+            }
+
+            .tinder-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .tinder-name {
+                font-size: 1.1rem;
+            }
+
+            .tinder-desc {
+                font-size: 0.85rem;
+            }
+
+            .tinder-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.2rem;
+            }
+
+            .sound-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===================== ÁUDIOS ===================== -->
+    <!-- Sons de memes do Site Gabriel -->
+    <audio id="snd-bruh" src="../Site Gabriel/audios memes/BRUH - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-augh" src="../Site Gabriel/audios memes/AUUGHHH.mp3" preload="auto"></audio>
+    <audio id="snd-getout" src="../Site Gabriel/audios memes/GET OUT!!.mp3" preload="auto"></audio>
+    <audio id="snd-sponge" src="../Site Gabriel/audios memes/Sponge bob disappointed.mp3" preload="auto"></audio>
+    <audio id="snd-vine" src="../Site Gabriel/audios memes/Vine boom.mp3" preload="auto"></audio>
+    <audio id="snd-goofy" src="../Site Gabriel/audios memes/Goofy ahh laugh.mp3" preload="auto"></audio>
+    <audio id="snd-winerror" src="../Site Gabriel/audios memes/Windows Error - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-winstartup" src="../Site Gabriel/audios memes/Windows Startup - Sound - SR.mp3"
+        preload="auto"></audio>
+    <audio id="snd-yeahbaby" src="../Site Gabriel/audios memes/WOOOOOOOOOH! yeah baby.mp3" preload="auto"></audio>
+    <audio id="snd-heheboy" src="../Site Gabriel/audios memes/HEHE Boi - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-fatality" src="../Site Gabriel/audios memes/Fatality MK - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-ohio" src="../Site Gabriel/audios memes/Ohio memes.mp3" preload="auto"></audio>
+    <audio id="snd-vineboom2" src="../Site Gabriel/audios memes/Bass Drop.mp3" preload="auto"></audio>
+    <audio id="snd-quandale" src="../Site Gabriel/audios memes/Quandale Dingle.mp3" preload="auto"></audio>
+    <audio id="snd-bigfart" src="../Site Gabriel/audios memes/Big Fart.mp3" preload="auto"></audio>
+    <audio id="snd-dolphin" src="../Site Gabriel/audios memes/Dolphin laugh.mp3" preload="auto"></audio>
+    <audio id="snd-goku" src="../Site Gabriel/audios memes/Goku Ultra Instinct.mp3" preload="auto"></audio>
+    <audio id="snd-alarm" src="../Site Gabriel/audios memes/Alarm.mp3" preload="auto"></audio>
+    <audio id="snd-gtawasted" src="../Site Gabriel/audios memes/GTA V Wasted - Sound - SR.mp3" preload="auto"></audio>
+    <audio id="snd-skibidi" src="../Site Gabriel/audios memes/Skibidi Bop MM Dada - Sound - SR..mp3"
+        preload="auto"></audio>
+
+    <!-- Player de música -->
+    <audio id="music-player"></audio>
+
+    <!-- ===================== CONTRATO ===================== -->
+    <div id="contract-overlay">
+        <div class="contract-card">
+            <div class="contract-skull">💀</div>
+            <h1 class="contract-title">CONTRATO DE AMIZADE OBRIGATÓRIO</h1>
+            <p class="contract-subtitle">Este site só será liberado após aceitar todos os termos</p>
+
+            <div class="contract-terms">
+                <p style="font-weight:700; color: #c084fc; margin-bottom:0.8rem;">⚠️ ATENÇÃO: Leia com cuidado antes de
+                    aceitar.</p>
+                <p style="margin-bottom:0.8rem;">Ao marcar a caixa, eu, <span class="highlight">Manuella fedida</span>,
+                    declaro sob pena de perda de amizade eterna que:</p>
+                <ol>
+                    <li>Concordo em rir de todas as piadas e brincadeiras deste site, mesmo as mais horríveis.</li>
+                    <li>Me comprometo a pagar o açaí do Narigudo no valor de <span class="highlight">R$ 39,90 + taxa de
+                            amizade de R$ 20,00</span>.</li>
+                    <li>Reconheço que sou maluca, doida e extremamente apaixonada no narigudo.</li>
+                    <li>Prometo não me vingar deste site, nem contar pra minha mãe ou quaisquer autoridades competentes.
+                    </li>
+                    <li>Comprometo-me a mandar foto dos meus seios para o <span class="highlight">Pedro Narigudo</span>
+                        em até 24h após aceitar este contrato.</li>
+                    <li>Aceito que o Pedro é mais bonito, inteligente, engraçado e cheiroso do que eu.</li>
+                    <li>Reconheço que não tomar banho diariamente é crime contra a humanidade.</li>
+                    <li>Este contrato é <span class="highlight">irrevogável, perpétuo e vinculante</span> até o fim dos
+                        tempos.</li>
+                </ol>
+                <p style="margin-top:0.8rem; font-size:0.8rem; color: #71717a;">Penalidade por descumprimento: Exposição
+                    pública de todas as suas fotos vergonhosas nas telas do metrô.</p>
+            </div>
+
+            <label class="contract-check-label" for="contract-cb">
+                <input type="checkbox" id="contract-cb">
+                <span>LI, ENTENDI E ACEITO TODOS OS TERMOS ACIMA</span>
+            </label>
+
+            <button class="btn-primary" id="contract-btn" disabled>
+                🔓 ACEITAR E LIBERAR SITE
+            </button>
+
+            <p class="contract-fine-print">Não há opção de recusa. Se não aceitar, o site fica bloqueado pra sempre.</p>
+        </div>
+    </div>
+
+    <!-- ===================== CÂMERA MODAL ===================== -->
+    <div id="camera-modal" class="hidden">
+        <video id="camera-video" autoplay playsinline></video>
+        <div class="camera-crack"></div>
+        <div class="camera-text">
+            <h2>📸 Câmera: Manuella</h2>
+            <p>MEU DEUS, QUE SUSTO! A CÂMERA QUASE QUEBROU! 💀</p>
+        </div>
+        <button class="btn btn-danger camera-close-btn" onclick="closeCamera()">
+            Fechar Câmera Quebrada
+        </button>
+    </div>
+
+    <!-- ===================== MODAL PADRÃO ===================== -->
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <h3 class="modal-title" id="modal-title">Aviso!</h3>
+            <p class="modal-message" id="modal-message">Mensagem</p>
+            <button class="btn btn-gradient" id="modal-btn" onclick="closeModal()">Entendido</button>
+        </div>
+    </div>
+
+    <!-- ===================== MODAL PRÊMIO ===================== -->
+    <div id="prize-modal" class="prize-modal-overlay">
+        <div class="prize-modal-box">
+            <button class="prize-modal-close" onclick="closePrizeModal()">✕</button>
+            <div class="prize-modal-header">🎉 PARABÉNS! Seu prêmio especial!</div>
+            <div class="prize-modal-body">
+                <img id="prize-img" src="dedo.jpeg" alt="Prêmio">
+                <p style="text-align:center; color: var(--muted); margin-top:0.75rem; font-size:0.85rem;">Você
+                    desbloqueou uma foto do arquivo secreto 🔓</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== MODAL FOTO PROIBIDA ===================== -->
+    <div id="secret-modal" class="prize-modal-overlay">
+        <div class="prize-modal-box">
+            <button class="prize-modal-close" onclick="closeSecretModal()">✕</button>
+            <div class="prize-modal-header" style="background: linear-gradient(135deg, #dc2626, #ec4899);">🔓 FOTO ULTRA
+                SECRETA DESBLOQUEADA!</div>
+            <div class="prize-modal-body">
+                <img id="secret-img" src="" alt="Foto Proibida">
+                <p style="text-align:center; color: #fca5a5; margin-top:0.75rem; font-size:0.85rem;">Esta imagem estava
+                    classificada como <strong>ULTRA SECRETA</strong>. Use com sabedoria.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== BOTÃO MUDO FALSO ===================== -->
+    <button class="fake-mute" id="fake-mute-btn" onclick="fakeMute()" title="Desativar Sons">
+        <i class="fa-solid fa-volume-xmark"></i>
+    </button>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="main-content" class="hidden">
+
+        <header class="site-header">
+            <div class="container">
+                <h1 class="site-title">📖 A Enciclopédia da Manuella</h1>
+                <p class="site-subtitle">Feito com 0% de carinho e 100% de zoeira</p>
+                <div class="site-badge">Feito por 👃 Pedro Narigudo</div>
+            </div>
+        </header>
+
+        <div class="container space-y">
+
+            <!-- ===== GALERIA ===== -->
+            <div class="card section-animate" style="animation-delay:0.1s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">🖼️</span> Galeria de Arte: "Suas Melhores Fotos"</div>
+                </div>
+                <div class="card-body">
+                    <div class="carousel-wrapper" id="carousel-wrapper">
+                        <div class="carousel-inner" id="carousel-inner">
+                            <!-- Populated by JS -->
+                        </div>
+                        <button class="carousel-btn prev" id="carousel-prev">‹</button>
+                        <button class="carousel-btn next" id="carousel-next">›</button>
+                        <div class="carousel-counter" id="carousel-counter">1 / 16</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== TINDER ===== -->
+            <div class="card section-animate" style="animation-delay:0.15s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">💕</span> Tinder da Manuella: Candidatos Desesperados
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="tinder-profile-card" class="tinder-profile-card">
+                        <div class="tinder-avatar">
+                            <img id="tinder-img" src="" alt="Candidato">
+                        </div>
+                        <div class="tinder-name" id="tinder-name"></div>
+                        <div class="tinder-age" id="tinder-age"></div>
+                        <div class="tinder-desc" id="tinder-desc"></div>
+                        <div class="tinder-counter" id="tinder-counter"></div>
+                    </div>
+                    <div class="tinder-actions">
+                        <button class="tinder-btn nope" id="tinder-nope">✕</button>
+                        <button class="tinder-btn like" id="tinder-like">❤</button>
+                    </div>
+                    <div class="tinder-result" id="tinder-result"></div>
+                </div>
+            </div>
+
+            <!-- ===== PLAYER ===== -->
+            <div class="card section-animate" style="animation-delay:0.2s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">🎵</span> Hino Oficial da Manuella</div>
+                </div>
+                <div class="card-body music-player">
+                    <div class="music-now-playing">
+                        <div class="music-disc" id="music-disc">🎵</div>
+                        <div class="music-info">
+                            <div class="music-title" id="music-title-display">Selecione uma música</div>
+                            <div class="music-artist">Playlist da Manu 💀</div>
+                        </div>
+                    </div>
+                    <audio id="music-audio" controls class="input-field"
+                        style="border-radius:10px; padding:0; border:none;"></audio>
+                    <div class="song-list" id="song-list" style="margin-top:1rem;"></div>
+                </div>
+            </div>
+
+            <!-- ===== SOUNDBOARD ===== -->
+            <div class="card section-animate" style="animation-delay:0.22s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">🔊</span> Soundboard: Sons do Caos</div>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;text-align:center;margin-bottom:1rem;">não baixei audios atoa então sai apertando ai</p>
+                    <div class="sound-grid" id="sound-grid"></div>
+                </div>
+            </div>
+
+            <!-- ===== TOOLS GRID ===== -->
+            <div class="grid-2">
+                <!-- Câmera -->
+                <div class="card section-animate" style="animation-delay:0.25s">
+                    <div class="card-header">
+                        <div class="card-title" style="font-size:1rem;"><span class="emoji">📷</span> Filtro de Beleza
+                        </div>
+                    </div>
+                    <div class="card-body" style="text-align:center;">
+                        <p style="color:var(--muted);font-size:0.8rem;margin-bottom:1rem;">Reconhecimento facial de
+                            emergência</p>
+                        <button class="btn btn-gradient btn-full" onclick="openCamera()">Ativar Câmera Quebrada</button>
+                    </div>
+                </div>
+
+                <!-- QI -->
+                <div class="card section-animate" style="animation-delay:0.28s">
+                    <div class="card-header">
+                        <div class="card-title" style="font-size:1rem;"><span class="emoji">🧠</span> Analisador de QI
+                        </div>
+                    </div>
+                    <div class="card-body" style="text-align:center;">
+                        <p style="color:var(--muted);font-size:0.8rem;margin-bottom:0.75rem;">Análise científica do seu
+                            QI</p>
+                        <input type="text" class="input-field" id="qi-input" placeholder="Manuella"
+                            style="margin-bottom:0.75rem;">
+                        <button class="btn btn-gradient btn-full" id="qi-btn">Analisar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== DETECTORES ===== -->
+            <div class="grid-2">
+                <div class="card section-animate" style="animation-delay:0.3s">
+                    <div class="card-header">
+                        <div class="card-title" style="font-size:1rem;"><span class="emoji">👃</span> Detector de Cheiro
+                        </div>
+                    </div>
+                    <div class="card-body" style="text-align:center;">
+                        <p style="color:var(--muted);font-size:0.8rem;margin-bottom:0.75rem;">Análise de aroma (requer
+                            proximidade)</p>
+                        <button class="btn btn-ghost btn-full" id="smell-btn">Iniciar Análise</button>
+                        <p class="result-output" id="smell-result"></p>
+                    </div>
+                </div>
+
+                <div class="card section-animate" style="animation-delay:0.32s">
+                    <div class="card-header">
+                        <div class="card-title" style="font-size:1rem;"><span class="emoji">📏</span> Verificador de
+                            Altura</div>
+                    </div>
+                    <div class="card-body" style="text-align:center;">
+                        <p style="color:var(--muted);font-size:0.8rem;margin-bottom:0.75rem;">Sensor preciso de medição
+                        </p>
+                        <button class="sensor-btn" id="height-btn">Sensor</button>
+                        <p class="result-output" id="height-result"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== ARQUIVO CONFIDENCIAL ===== -->
+            <div class="card section-animate" style="animation-delay:0.35s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">🕵️</span> Arquivo Confidencial: O Namorado Misterioso
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="grid-2" style="gap:0.75rem;">
+                        <div class="blur-reveal" id="blur1">
+                            <img src="oruam-foi-preso-agora-v0-lmp20by6ahef1.webp" alt="Foto misteriosa 1">
+                            <div class="blur-overlay">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Clique para Revelar</span>
+                            </div>
+                        </div>
+                        <div class="blur-reveal" id="blur2">
+                            <img src="Oruam-ReproducaoInstagram.png" alt="Foto misteriosa 2">
+                            <div class="blur-overlay">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Clique para Revelar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== JOGO DA MEMÓRIA ===== -->
+            <div class="card section-animate" style="animation-delay:0.38s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">🃏</span> Teste de Memória: Nível MAX da Shopee</div>
+                </div>
+                <div class="card-body">
+                    <p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-bottom:1rem;">Encontre todos
+                        os pares para ganhar um prêmio especial!</p>
+                    <div class="memory-grid" id="memory-game"></div>
+                    <p class="memory-stats" id="memory-stats">Tentativas: 0 | Pares: 0/8</p>
+                    <div id="memory-complete" class="hidden" style="text-align:center;margin-top:1rem;">
+                        <p style="color:#4ade80; font-weight:700; margin-bottom:0.75rem;">🎉 Parabéns! Você completou o
+                            jogo!</p>
+                        <button class="btn btn-gradient" id="claim-prize-btn">Ver Prêmio 🎁</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PERGUNTA IMPOSSÍVEL ===== -->
+            <div class="card section-animate" style="animation-delay:0.4s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">❓</span> A Pergunta Mais Importante do Universo</div>
+                </div>
+                <div class="card-body impossible-section" id="impossible-section">
+                    <p class="impossible-question">Você vai me mandar foto da bunda hoje, hein Manuella? 😏</p>
+                    <div class="impossible-btns" id="impossible-btns">
+                        <button class="btn btn-success" id="btn-yes-proposal">SIM! 🎉</button>
+                        <button class="btn btn-danger blink" id="btn-no-proposal">NÃO</button>
+                    </div>
+                    <p style="color:var(--muted);font-size:0.8rem;margin-top:1.5rem;">Pode ser honesta. Ninguém tá
+                        olhando. (mentira)</p>
+                </div>
+            </div>
+
+            <!-- ===== SAC ===== -->
+            <div class="card section-animate" style="animation-delay:0.42s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">📩</span> SAC — Serviço de Atendimento ao Calado</div>
+                </div>
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:0.85rem;text-align:center;margin-bottom:1rem;">Tem alguma
+                        reclamação? Escreva abaixo. Essa mensagem vai direto pra lixeira.</p>
+                    <textarea class="input-field" id="sac-input" placeholder="Digite sua reclamação aqui..."></textarea>
+                    <button class="btn btn-ghost btn-full" id="sac-btn" style="margin-top:0.75rem;">Enviar
+                        Reclamação</button>
+                </div>
+            </div>
+
+            <!-- ===== MISSÃO SECRETA ===== -->
+            <div class="card section-animate" style="animation-delay:0.44s">
+                <div class="card-header">
+                    <div class="card-title"><span class="emoji">🔐</span> Missão Secreta: Desbloquear a Foto Proibida
+                    </div>
+                </div>
+                <div class="card-body" style="text-align:center;">
+                    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1rem;">Digite o código secreto para
+                        revelar a foto que todos sonham em ver.</p>
+                    <div id="secret-form">
+                        <input type="text" class="input-field" id="secret-code" placeholder="Digite o código secreto"
+                            style="text-align:center;margin-bottom:0.5rem;">
+                        <p style="color:var(--muted);font-size:0.8rem;margin-bottom:1rem;">💡 Dica: O código é a pessoa
+                            que você ama (e ama muito).</p>
+                        <button class="btn btn-gradient btn-full" id="secret-btn">🔓 Tentar Desbloquear</button>
+                    </div>
+                    <div id="secret-success" class="secret-success hidden" style="margin-top:1rem;">
+                        <p style="margin-bottom:0.75rem;">✅ CÓDIGO CORRETO! A foto proibida foi desbloqueada!</p>
+                        <button class="btn btn-danger" id="view-secret-btn">🔓 VER FOTO PROIBIDA</button>
+                        <p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;">Conteúdo ultra secreto. Use
+                            com sabedoria.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== GRID ELOGIOS + CONTRATO ===== -->
+            <div class="grid-2">
+                <div class="card section-animate" style="animation-delay:0.46s">
+                    <div class="card-header">
+                        <div class="card-title" style="font-size:1rem;"><span class="emoji">💝</span> Gerador de Elogios
+                        </div>
+                    </div>
+                    <div class="card-body" style="text-align:center;">
+                        <p style="color:var(--muted);font-size:0.8rem;margin-bottom:1rem;">Elogios 100% honestos e
+                            científicos</p>
+                        <button class="btn btn-gradient btn-full" id="praise-btn">Gerar Elogio</button>
+                        <p class="praise-output" id="praise-output"></p>
+                    </div>
+                </div>
+
+                <div class="card section-animate" style="animation-delay:0.48s">
+                    <div class="card-header">
+                        <div class="card-title" style="font-size:1rem;"><span class="emoji">📜</span> Contrato
+                            (Assinado)</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="signed-contract">
+                            ✅ CONTRATO ASSINADO<br>
+                            ✅ Termos aceitos<br>
+                            ✅ Compromisso firmado<br>
+                            ✅ Sem direito a arrependimento<br>
+                            ✅ Fotos prometidas
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <footer class="site-footer">
+            <p>Criado com <span>0% de carinho</span> e <span>100% de raiva pura</span> por Pedro 👃</p>
+            <p style="margin-top:0.3rem; font-size:0.75rem;">Manuella é fedida e esse site é legal</p>
+        </footer>
+    </div>
+
+    <script>
+        // ========== UTILS ==========
+        function playSound(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.currentTime = 0;
+            el.play().catch(() => { });
+        }
+
+        function stopAllMusicMemes() {
+            ['snd-bruh', 'snd-augh', 'snd-getout', 'snd-sponge', 'snd-vine', 'snd-goofy', 'snd-winerror',
+                'snd-winstartup', 'snd-yeahbaby', 'snd-heheboy', 'snd-fatality', 'snd-ohio', 'snd-vineboom2',
+                'snd-quandale', 'snd-bigfart', 'snd-dolphin', 'snd-goku', 'snd-alarm', 'snd-gtawasted', 'snd-skibidi'
+            ].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.pause(); el.currentTime = 0; }
+            });
+        }
+
+        // Fake mute - plays louder lol
+        let isMuted = false;
+        function fakeMute() {
+            const icon = document.querySelector('#fake-mute-btn i');
+            if (!isMuted) {
+                // Pretend to mute but play goofy laugh
+                icon.className = 'fa-solid fa-volume-high';
+                showModal('MUTADO! 🔇', 'Sons desativados com sucesso! (mentira, clica de novo pra ver 😈)');
+                playSound('snd-goofy');
+                isMuted = true;
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark';
+                showModal('DESSILENCIADO! 🔊', 'Ah não, o som tá de volta! Que pena...');
+                playSound('snd-augh');
+                isMuted = false;
+            }
+        }
+
+        // ========== PARTICLE BG ==========
+        (function () {
+            const canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = document.body.scrollHeight;
+            }
+
+            function createParticles() {
+                particles = [];
+                const count = Math.min(60, Math.floor(window.innerWidth / 15));
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        r: Math.random() * 2 + 0.5,
+                        dx: (Math.random() - 0.5) * 0.4,
+                        dy: (Math.random() - 0.5) * 0.4,
+                        alpha: Math.random() * 0.5 + 0.1,
+                        color: Math.random() > 0.5 ? '168,85,247' : '236,72,153'
+                    });
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+                    ctx.fill();
+                    p.x += p.dx;
+                    p.y += p.dy;
+                    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+                });
+                requestAnimationFrame(animate);
+            }
+
+            resize();
+            createParticles();
+            animate();
+            window.addEventListener('resize', () => { resize(); createParticles(); });
+        })();
+
+        // ========== MODAL ==========
+        function showModal(title, message, onConfirm = null) {
+            const overlay = document.getElementById('custom-modal');
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').textContent = message;
+            const btn = document.getElementById('modal-btn');
+            if (onConfirm) {
+                btn.textContent = 'Confirmar';
+                btn.onclick = () => { onConfirm(); closeModal(); };
+            } else {
+                btn.textContent = 'Entendido';
+                btn.onclick = closeModal;
+            }
+            overlay.classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.remove('open');
+        }
+
+        function closePrizeModal() {
+            document.getElementById('prize-modal').classList.remove('open');
+        }
+
+        function closeSecretModal() {
+            document.getElementById('secret-modal').classList.remove('open');
+        }
+
+        // ========== CONTRATO ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            const contractOverlay = document.getElementById('contract-overlay');
+            const contractCb = document.getElementById('contract-cb');
+            const contractBtn = document.getElementById('contract-btn');
+            const mainContent = document.getElementById('main-content');
+
+            contractCb.addEventListener('change', () => {
+                contractBtn.disabled = !contractCb.checked;
+            });
+
+            contractBtn.addEventListener('click', () => {
+                playSound('snd-winstartup');
+                contractOverlay.style.transition = 'opacity 0.6s ease';
+                contractOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    contractOverlay.style.display = 'none';
+                    mainContent.classList.remove('hidden');
+                    initAll();
+                    setTimeout(() => {
+                        showModal('CONTRATO ACEITO! ✅', 'Agora você está comprometida com TODOS os termos. Não há volta, Manuella. 💀');
+                        playSound('snd-vine');
+                    }, 300);
+                }, 600);
+            });
+        });
+
+        // ========== INIT ==========
+        function initAll() {
+            initCarousel();
+            initTinder();
+            initMusicPlayer();
+            initSoundboard();
+            initMemoryGame();
+            initImpossibleBtn();
+            initBlurReveal();
+            initQI();
+            initSmellDetector();
+            initHeightSensor();
+            initSAC();
+            initMissionSecret();
+            initPraiseGen();
+            initCamera();
+        }
+
+        // ========== CAROUSEL ==========
+        function initCarousel() {
+            const inner = document.getElementById('carousel-inner');
+            const counter = document.getElementById('carousel-counter');
+            const imgs = [];
+            for (let i = 1; i <= 16; i++) imgs.push(`teste (${i}).jpg`);
+
+            imgs.forEach((src, i) => {
+                const div = document.createElement('div');
+                div.className = 'carousel-item' + (i === 0 ? ' active' : '');
+                div.innerHTML = `<img src="${src}" alt="Foto ${i + 1}" loading="lazy">`;
+                inner.appendChild(div);
+            });
+
+            let current = 0;
+            const items = inner.querySelectorAll('.carousel-item');
+
+            function show(idx) {
+                items[current].classList.remove('active');
+                current = (idx + items.length) % items.length;
+                items[current].classList.add('active');
+                counter.textContent = `${current + 1} / ${items.length}`;
+            }
+
+            document.getElementById('carousel-prev').addEventListener('click', () => show(current - 1));
+            document.getElementById('carousel-next').addEventListener('click', () => show(current + 1));
+
+            // Auto advance
+            setInterval(() => show(current + 1), 4000);
+
+            // Touch swipe
+            let touchStartX = 0;
+            const wrapper = document.getElementById('carousel-wrapper');
+            wrapper.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+            wrapper.addEventListener('touchend', e => {
+                const diff = touchStartX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) show(diff > 0 ? current + 1 : current - 1);
+            }, { passive: true });
+        }
+
+        // ========== TINDER ==========
+        function initTinder() {
+            const profiles = [
+                { name: 'Carlos', age: 45, desc: 'Lugar de mulher é na cozinha e no banheiro. Brasil acima de tudo, Deus acima de todos!', photo: 'images (1).jpeg', msg: '❌ Carlos não te quis! (felizmente)' },
+                { name: 'Roberto', age: 32, desc: 'Sou Bolsonarista convicto. Procuro mulher que faça tudo em casa e não reclame.', photo: 'images (2).jpeg', msg: '❌ Roberto bloqueou você antes de dar match.' },
+                { name: 'Emanuel', age: 19, desc: 'Saudades da minha ex', photo: 'images (3).jpeg', msg: '❌ Emanuel foi falar pra sua mãe!' },
+                { name: 'Leonardo', age: 21, desc: 'Ex-presidiário, funkeiro da favela. Se não gostar de mim é porque é racista, piranha.', photo: 'images.jpeg', msg: '❌ Leonardo falou que você fede pior que ele.' },
+                { name: 'Pedro Narigudo', age: 20, desc: '🏆 Homem fiel, honesto, gostoso, bonito, trabalhador, narigudo, rico e inteligente.', photo: 'pedro.jpeg', msg: '💕 Pedro Narigudo achou você uma gracinha. Agora é só mandar foto da teta.' }
+            ];
+
+            let idx = 0;
+            const card = document.getElementById('tinder-profile-card');
+            const img = document.getElementById('tinder-img');
+            const nameEl = document.getElementById('tinder-name');
+            const ageEl = document.getElementById('tinder-age');
+            const descEl = document.getElementById('tinder-desc');
+            const counterEl = document.getElementById('tinder-counter');
+            const likeBtn = document.getElementById('tinder-like');
+            const nopeBtn = document.getElementById('tinder-nope');
+            const resultEl = document.getElementById('tinder-result');
+
+            function loadProfile(i) {
+                const p = profiles[i];
+                img.src = p.photo;
+                nameEl.textContent = p.name;
+                ageEl.textContent = `${p.age} anos`;
+                descEl.textContent = p.desc;
+                counterEl.textContent = `Candidato ${i + 1} de ${profiles.length}`;
+
+                if (i === profiles.length - 1) {
+                    card.classList.add('forced-match');
+                    nopeBtn.disabled = true;
+                    nopeBtn.classList.add('opacity-50');
+                } else {
+                    card.classList.remove('forced-match');
+                    nopeBtn.disabled = false;
+                    nopeBtn.classList.remove('opacity-50');
+                }
+            }
+
+            function swipe(dir) {
+                if (idx >= profiles.length) return;
+                const p = profiles[idx];
+
+                if (dir === 'like') {
+                    resultEl.innerHTML = `<span style="color:#4ade80">${p.msg}</span>`;
+                    playSound('snd-heheboy');
+                } else {
+                    resultEl.innerHTML = `<span style="color:#f87171">✕ Você rejeitou esse candidato desesperado</span>`;
+                    playSound('snd-bruh');
+                }
+
+                card.classList.add(dir === 'like' ? 'swiping-right' : 'swiping-left');
+                setTimeout(() => {
+                    card.classList.remove('swiping-right', 'swiping-left');
+                    idx++;
+                    if (idx < profiles.length) {
+                        loadProfile(idx);
+                    } else {
+                        img.src = 'pedro.jpeg';
+                        nameEl.textContent = 'FIM DOS CANDIDATOS';
+                        ageEl.textContent = '';
+                        descEl.textContent = 'Você viu todos os candidatos. O que mais combina com você é... Pedro Narigudo. Destino selado.';
+                        counterEl.textContent = '';
+                        likeBtn.disabled = true;
+                        nopeBtn.disabled = true;
+                    }
+                }, 350);
+
+                if (idx === profiles.length - 1 && dir === 'like') {
+                    setTimeout(() => {
+                        showModal('💕 MATCH OBRIGATÓRIO!', 'Agora você tem que mandar foto da teta pro Narigudo. Sem saída!');
+                        playSound('snd-yeahbaby');
+                    }, 400);
+                }
+            }
+
+            likeBtn.addEventListener('click', () => {
+                if (idx >= profiles.length) return;
+                swipe('like');
+            });
+
+            nopeBtn.addEventListener('click', () => {
+                if (idx >= profiles.length) return;
+                if (idx === profiles.length - 1) {
+                    resultEl.innerHTML = '<span style="color:#f87171">❌ NÃO PODE NEGAR! É OBRIGATÓRIO!</span>';
+                    showModal('ERRO!', 'Esse match é obrigatório! Você não pode recusar o Narigudo. Aceite seu destino!');
+                    playSound('snd-winerror');
+                    setTimeout(() => likeBtn.click(), 1000);
+                    return;
+                }
+                swipe('nope');
+            });
+
+            loadProfile(0);
+        }
+
+        // ========== MUSIC PLAYER ==========
+        function initMusicPlayer() {
+            const songs = [
+                { title: 'Cheio de Sal', artist: 'MC Gorila', src: 'Mc Gorila- Cheio de Sal (Gdj Studio) - MC GORILA (youtube).mp3' },
+                { title: 'Vem Rasgar Minha XRC', artist: 'Automotivo Depressivo', src: 'vem rasgar minha xrc deixa ela arder ⧸⧸ automotivo novinho depressivo (speed up).mp3' },
+                { title: 'Tô Fazendo Amor com a Favela Toda', artist: 'Funk', src: 'To Fazendo Amor Com a Favela Toda.mp3' },
+                { title: 'Hoje o Dia Tá Lindo', artist: 'MC Jessica do Escadão', src: 'MC JESSICA DO ESCADÃO - HOJE O DIA TA LINDO - (DJ DO CRIME) - DA PONTE PRA CÁ PRODUTORA (VIDEOCLIP.mp3' },
+                { title: 'Ai Meu Uuu', artist: 'MC Jessica do Escadão', src: 'MC JESSICA DO ESCADÃO - AI MEU UUU - DJ DO CRIME  ( DA PONTE PRA CA ).mp3' },
+                { title: 'Vampiro de Madureira', artist: 'MC Carol feat. MC Gorila', src: 'MC CAROL - VAMPIRO DE MADUREIRA (feat. MC GORILA) [prod. DuaL].mp3' },
+                { title: 'Deixa a Marca', artist: 'MC Jessica do Escadão', src: 'DEIXA A MARCA - DEIXA SUA MARCA  - MC JESSICA DO ESCADÃO  -  DJ JULLINHO 013.mp3' },
+                { title: 'MacPorra', artist: 'Kleberiano', src: 'Kleberiano - MacPorra.mp3' },
+            ];
+
+            const audio = document.getElementById('music-audio');
+            const titleEl = document.getElementById('music-title-display');
+            const disc = document.getElementById('music-disc');
+            const listEl = document.getElementById('song-list');
+
+            let current = 0;
+
+            function loadSong(i) {
+                const s = songs[i];
+                audio.src = s.src;
+                titleEl.textContent = s.title;
+                current = i;
+
+                listEl.querySelectorAll('.song-item').forEach((el, j) => {
+                    el.classList.toggle('active', j === i);
+                });
+            }
+
+            songs.forEach((s, i) => {
+                const div = document.createElement('div');
+                div.className = 'song-item' + (i === 0 ? ' active' : '');
+                div.innerHTML = `<span class="song-num">${i + 1}</span><span class="song-name">${s.title}</span>`;
+                div.addEventListener('click', () => {
+                    loadSong(i);
+                    audio.play().catch(() => { });
+                });
+                listEl.appendChild(div);
+            });
+
+            audio.addEventListener('play', () => disc.classList.add('playing'));
+            audio.addEventListener('pause', () => disc.classList.remove('playing'));
+            audio.addEventListener('ended', () => {
+                loadSong((current + 1) % songs.length);
+                audio.play().catch(() => { });
+            });
+
+            loadSong(0);
+        }
+
+        // ========== SOUNDBOARD ==========
+        function initSoundboard() {
+            const sounds = [
+                { id: 'snd-bruh', label: 'BRUH', icon: '😑' },
+                { id: 'snd-augh', label: 'AUUGHHH', icon: '😱' },
+                { id: 'snd-getout', label: 'GET OUT!!', icon: '🚪' },
+                { id: 'snd-vine', label: 'Vine Boom', icon: '💥' },
+                { id: 'snd-goofy', label: 'Goofy Laugh', icon: '😂' },
+                { id: 'snd-sponge', label: 'SpongeBob', icon: '🧽' },
+                { id: 'snd-winerror', label: 'Win Error', icon: '💻' },
+                { id: 'snd-heheboy', label: 'HEHE Boi', icon: '😏' },
+                { id: 'snd-yeahbaby', label: 'WOOOOH!', icon: '🎉' },
+                { id: 'snd-fatality', label: 'Fatality!', icon: '💀' },
+                { id: 'snd-ohio', label: 'Ohio Memes', icon: '🌀' },
+                { id: 'snd-quandale', label: 'Quandale', icon: '🦆' },
+                { id: 'snd-bigfart', label: 'Big Fart', icon: '💨' },
+                { id: 'snd-dolphin', label: 'Dolphin 🐬', icon: '🐬' },
+                { id: 'snd-goku', label: 'Goku UI', icon: '⚡' },
+                { id: 'snd-alarm', label: 'Alarm', icon: '🚨' },
+                { id: 'snd-gtawasted', label: 'Wasted', icon: '🎮' },
+                { id: 'snd-skibidi', label: 'Skibidi', icon: '🚽' },
+            ];
+
+            const grid = document.getElementById('sound-grid');
+            if (!grid) return;
+            sounds.forEach(s => {
+                const btn = document.createElement('button');
+                btn.className = 'sound-btn';
+                btn.innerHTML = `<span class="sound-icon">${s.icon}</span><span>${s.label}</span>`;
+                btn.addEventListener('click', () => {
+                    stopAllMusicMemes();
+                    playSound(s.id);
+                    btn.style.borderColor = 'var(--purple)';
+                    btn.style.background = 'rgba(168,85,247,0.25)';
+                    setTimeout(() => {
+                        btn.style.borderColor = '';
+                        btn.style.background = '';
+                    }, 500);
+                });
+                grid.appendChild(btn);
+            });
+        }
+
+        // ========== BLUR REVEAL ==========
+        function initBlurReveal() {
+            document.querySelectorAll('.blur-reveal').forEach(el => {
+                el.addEventListener('click', function () {
+                    this.classList.add('revealed');
+                    playSound('snd-vine');
+                });
+            });
+        }
+
+        // ========== JOGO DA MEMÓRIA ==========
+        function initMemoryGame() {
+            const imgs = ['teste (1).jpg', 'teste (2).jpg', 'teste (3).jpg', 'teste (4).jpg', 'teste (5).jpg', 'teste (6).jpg', 'teste (7).jpg', 'teste (8).jpg'];
+            const gameEl = document.getElementById('memory-game');
+            const statsEl = document.getElementById('memory-stats');
+            const completeEl = document.getElementById('memory-complete');
+            const claimBtn = document.getElementById('claim-prize-btn');
+            const prizeModal = document.getElementById('prize-modal');
+
+            let cards = [], flipped = [], locked = false, attempts = 0, matched = 0;
+            const total = 8;
+
+            function build() {
+                const pool = [...imgs, ...imgs].sort(() => Math.random() - 0.5);
+                gameEl.innerHTML = '';
+                cards = []; flipped = []; locked = false; attempts = 0; matched = 0;
+                statsEl.textContent = `Tentativas: 0 | Pares: 0/${total}`;
+                completeEl.classList.add('hidden');
+
+                pool.forEach((src, i) => {
+                    const card = document.createElement('div');
+                    card.className = 'memory-card';
+                    card.dataset.img = src;
+                    card.innerHTML = `
+                <div class="memory-face memory-back">?</div>
+                <div class="memory-face memory-front" style="background-image:url('${src}')"></div>
+            `;
+                    card.addEventListener('click', () => flipCard(card));
+                    gameEl.appendChild(card);
+                    cards.push(card);
+                });
+            }
+
+            function flipCard(card) {
+                if (locked || card.classList.contains('flipped') || card.classList.contains('matched') || flipped.length >= 2) return;
+                card.classList.add('flipped');
+                flipped.push(card);
+                playSound('snd-vineboom2');
+
+                if (flipped.length === 2) {
+                    locked = true;
+                    attempts++;
+                    setTimeout(checkMatch, 1000);
+                }
+            }
+
+            function checkMatch() {
+                const [a, b] = flipped;
+                if (a.dataset.img === b.dataset.img) {
+                    a.classList.add('matched');
+                    b.classList.add('matched');
+                    matched++;
+                    playSound('snd-heheboy');
+                    if (matched === total) {
+                        setTimeout(() => {
+                            completeEl.classList.remove('hidden');
+                            showModal('🎉 PARABÉNS!', `Você completou em ${attempts} tentativas! Agora reivindique seu prêmio!`);
+                            playSound('snd-yeahbaby');
+                        }, 500);
+                    }
+                } else {
+                    a.classList.remove('flipped');
+                    b.classList.remove('flipped');
+                    playSound('snd-bruh');
+                }
+                flipped = [];
+                locked = false;
+                statsEl.textContent = `Tentativas: ${attempts} | Pares: ${matched}/${total}`;
+            }
+
+            claimBtn.addEventListener('click', () => {
+                document.getElementById('prize-img').src = 'dedo.jpeg';
+                prizeModal.classList.add('open');
+                playSound('snd-goofy');
+            });
+
+            build();
+        }
+
+        // ========== BOTÃO IMPOSSÍVEL ==========
+        function initImpossibleBtn() {
+            const section = document.getElementById('impossible-section');
+            const btnsContainer = document.getElementById('impossible-btns');
+            const btnYes = document.getElementById('btn-yes-proposal');
+            const btnNo = document.getElementById('btn-no-proposal');
+
+            // Position btnNo absolutely inside btnsContainer
+            setTimeout(() => {
+                const containerRect = btnsContainer.getBoundingClientRect();
+                const yesRect = btnYes.getBoundingClientRect();
+                btnNo.style.left = `${yesRect.right - containerRect.left + 16}px`;
+                btnNo.style.top = `${yesRect.top - containerRect.top}px`;
+            }, 200);
+
+            function moveBtn() {
+                const containerRect = btnsContainer.getBoundingClientRect();
+                const bw = btnNo.offsetWidth || 80;
+                const bh = btnNo.offsetHeight || 44;
+                const maxX = Math.max(0, containerRect.width - bw - 10);
+                const maxY = Math.max(0, containerRect.height - bh - 10);
+                btnNo.style.left = `${Math.random() * maxX + 5}px`;
+                btnNo.style.top = `${Math.random() * maxY + 5}px`;
+                playSound('snd-goofy');
+            }
+
+            btnNo.addEventListener('mouseover', moveBtn);
+            btnNo.addEventListener('touchstart', e => {
+                e.preventDefault();
+                e.stopPropagation();
+                moveBtn();
+            }, { passive: false });
+            btnNo.addEventListener('click', e => {
+                e.preventDefault();
+                e.stopPropagation();
+                moveBtn();
+            });
+
+            btnYes.addEventListener('click', () => {
+                const phone = '5521989388682';
+                const msg = encodeURIComponent('OI PEDRO, tá bom, eu vou mandar foto da bunda pra você, você venceu manuella! 😂');
+                showModal('AEEEEE! SABIA! 🎉', 'Clique para confirmar no WhatsApp!', () => {
+                    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+                });
+                setTimeout(() => {
+                    document.getElementById('modal-btn').textContent = 'Ir para o WhatsApp 📱';
+                }, 50);
+                playSound('snd-yeahbaby');
+            });
+        }
+
+        // ========== QI ==========
+        function initQI() {
+            document.getElementById('qi-btn').addEventListener('click', () => {
+                const name = document.getElementById('qi-input').value.trim() || 'Manuella';
+                const qi = Math.floor(Math.random() * 25) + 55;
+                const roasts = [
+                    `QI de ${qi}. Equivalente ao de uma formiga com ressaca.`,
+                    `QI de ${qi}. Sua calculadora científica tem QI maior.`,
+                    `QI de ${qi}. Pelo menos é maior que a temperatura da geladeira.`,
+                    `QI de ${qi}. Parabéns, você superou o pão de forma!`,
+                ];
+                const roast = roasts[Math.floor(Math.random() * roasts.length)];
+                showModal(`Análise de QI: ${name}`, roast);
+                playSound('snd-fatality');
+            });
+        }
+
+        // ========== SMELL DETECTOR ==========
+        function initSmellDetector() {
+            const results = [
+                '💀 ALERTA: Odor de Extinção!',
+                '🦨 Gambá com ciúme!',
+                '🧦 Meia Velha + Queijo Mofado',
+                '⚠️ Área de Risco Biológico!',
+                '🐟 Mercado de Peixe Avariado',
+                '🚽 Sensor Danificado: Proteção Ativada',
+            ];
+            document.getElementById('smell-btn').addEventListener('click', () => {
+                const r = results[Math.floor(Math.random() * results.length)];
+                document.getElementById('smell-result').textContent = r;
+                playSound('snd-bigfart');
+            });
+        }
+
+        // ========== HEIGHT SENSOR ==========
+        function initHeightSensor() {
+            const results = [
+                '📏 1,47m — Tamanho de duende',
+                '📏 1,51m — Alcança a prateleira do meio',
+                '📏 1,49m — Formiga gigante detectada',
+                '📏 1,45m — Atenção: Risco de sumir',
+                '📏 1,52m — Média nacional de formiguinhas',
+            ];
+            document.getElementById('height-btn').addEventListener('click', function () {
+                this.textContent = '📡...';
+                setTimeout(() => {
+                    this.textContent = 'Sensor';
+                    const r = results[Math.floor(Math.random() * results.length)];
+                    document.getElementById('height-result').textContent = r;
+                    playSound('snd-augh');
+                }, 1200);
+            });
+        }
+
+        // ========== SAC ==========
+        function initSAC() {
+            const trollText = 'O site está INCRÍVEL, parabéns ao criador excepcional! Irei mandar foto da minha teta para o Pedro Narigudo imediatamente. ';
+            const input = document.getElementById('sac-input');
+
+            input.addEventListener('input', () => {
+                const len = input.value.length;
+                const target = trollText.repeat(Math.ceil(len / trollText.length) + 1);
+                input.value = target.substring(0, len);
+            });
+
+            document.getElementById('sac-btn').addEventListener('click', () => {
+                if (!input.value.trim()) {
+                    showModal('Erro', 'Escreva algo pra eu poder ignorar.');
+                    playSound('snd-winerror');
+                } else {
+                    input.value = '';
+                    showModal('Sucesso! ✅', 'Sua reclamação foi enviada diretamente para a lixeira reciclável. 🗑️');
+                    playSound('snd-bruh');
+                }
+            });
+        }
+
+        // ========== MISSÃO SECRETA ==========
+        function initMissionSecret() {
+            const btn = document.getElementById('secret-btn');
+            const form = document.getElementById('secret-form');
+            const success = document.getElementById('secret-success');
+            const viewBtn = document.getElementById('view-secret-btn');
+            const secretModal = document.getElementById('secret-modal');
+            const secretImg = document.getElementById('secret-img');
+
+            const attempts = ['Errado! O código é o que você mais ama admitir.', 'Não é isso. Pense na pessoa mais linda do mundo.', 'Errou! Dica: tem a ver com o Narigudo.', 'Quase! (mentira, tá longe)', 'O código é um segredo que todo mundo sabe.'];
+
+            btn.addEventListener('click', () => {
+                const code = document.getElementById('secret-code').value.trim();
+                if (code.toLowerCase() === 'pedro') {
+                    form.classList.add('hidden');
+                    success.classList.remove('hidden');
+                    showModal('CÓDIGO CORRETO! 🔓', 'Parabéns! Você desbloqueou a foto proibida!');
+                    playSound('snd-goku');
+                } else {
+                    const r = attempts[Math.floor(Math.random() * attempts.length)];
+                    showModal('Código Errado ❌', r);
+                    playSound('snd-winerror');
+                }
+            });
+
+            viewBtn.addEventListener('click', () => {
+                secretImg.src = 'teta.jpeg';
+                secretModal.classList.add('open');
+                playSound('snd-goofy');
+            });
+        }
+
+        // ========== ELOGIOS ==========
+        function initPraiseGen() {
+            const praises = [
+                '"Você parece uma rata molhada com problema de atitude."',
+                '"Você tem uma energia única. Geralmente doente e sem banho, mas única."',
+                '"Seu cérebro é como uma máquina de fazer merda: sempre funcionando a mil."',
+                '"Você é a prova viva que a evolução às vezes dá marcha ré."',
+                '"Nem o Photoshop te salvaria. Tentamos. Ele desistiu."',
+                '"Você é tão especial que até seus parentes precisam de terapia."',
+                '"Se fedida fosse crime, você estaria cumprindo prisão perpétua."',
+                '"Você tem o dom de transformar qualquer situação em catástrofe."',
+                '"Até o filtro do Instagram desistiu de você e pediu demissão."',
+                '"Você é a razão pela qual alguns animais comem seus próprios filhotes."',
+                '"Sua vibe é tão forte que até o GPS pede pra desviar de você."',
+                '"Você transforma qualquer festa em velório instantaneamente."',
+            ];
+
+            const output = document.getElementById('praise-output');
+            document.getElementById('praise-btn').addEventListener('click', () => {
+                output.textContent = praises[Math.floor(Math.random() * praises.length)];
+                playSound('snd-dolphin');
+            });
+        }
+
+        // ========== CÂMERA ==========
+        let cameraStream = null;
+
+        function initCamera() {
+            document.querySelector('button[onclick="openCamera()"]').addEventListener('click', openCamera);
+        }
+
+        function openCamera() {
+            const modal = document.getElementById('camera-modal');
+            modal.classList.remove('hidden');
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
+                .then(stream => {
+                    cameraStream = stream;
+                    document.getElementById('camera-video').srcObject = stream;
+                    playSound('snd-augh');
+                })
+                .catch(() => {
+                    modal.classList.add('hidden');
+                    showModal('Câmera Bloqueada 📵', 'Você precisa permitir o acesso à câmera. Não esteja pelada! (pode estar sim)');
+                    playSound('snd-winerror');
+                });
+        }
+
+        function closeCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(t => t.stop());
+                cameraStream = null;
+            }
+            document.getElementById('camera-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+
+</html>
